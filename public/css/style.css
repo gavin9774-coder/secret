@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    font-family: Arial, sans-serif;
+    font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,43 +9,45 @@ body {
     flex-direction: column;
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-direction: row;
-    align-items: end;
-    flex-wrap: wrap;
-}
-
+#yes-button,
 #no-button {
     margin: 0 10px;
     color: white;
-    background-color: red;
-    height: 40px !important;
-    width: auto;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
 
-    p {
-        margin: 0;
-        object-fit: contain;
-    }
+    /* Make text centered + scalable */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Bubbly pill style */
+    border-radius: 999px;
+    padding: 0 22px;
+    height: 40px;
+
+    /* Base font sizing (JS will increase for YES as it grows) */
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+
+    transition: transform 0.12s ease, width 0.12s ease, height 0.12s ease, font-size 0.12s ease;
 }
 
 #yes-button {
-    margin: 0 10px;
-    color: white;
-    border: none;
     background-color: green;
-    cursor: pointer;
-    height: 40px;
+    width: 90px;
+}
 
-    p {
-        margin: 0;
-        object-fit: contain;
-    }
+#no-button {
+    background-color: red;
+    width: 90px;
+    margin-top: 10px;
+}
+
+#yes-button:hover,
+#no-button:hover {
+    transform: scale(1.06);
 }
 
 /* Make responsive for mobile */
