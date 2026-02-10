@@ -81,19 +81,3 @@ body {
         height: 250px;
     }
 }
-
-.creator {
-    text-decoration: none;
-    color: #333;
-}
-
-.creator:visited {
-    text-decoration: none;
-    color: #333;
-}
-
-.creator:hover {
-    text-decoration: underline;
-    color: #555;
-}
-
