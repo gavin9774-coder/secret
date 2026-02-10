@@ -95,16 +95,3 @@ body {
     color: #555;
 }
 
-/* CSS For Mobile */
-@media (max-width: 768px) {
-    .language-selector {
-        position: unset;
-        margin-top: 30px;
-        font-family: Arial, sans-serif;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-}
