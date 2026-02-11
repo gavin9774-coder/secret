@@ -45,11 +45,25 @@ function setYesButtonSize(px) {
 
 function setNoButtonSize(px) {
   const clamped = Math.max(28, px);
+
   no_button.style.height = `${clamped}px`;
   no_button.style.width = `${clamped}px`;
 
-  const fontPx = Math.max(10, Math.min(30, Math.round(clamped * 0.30)));
+  // 🔥 Dynamic font shrink based on BOTH size + text length
+  const textLength = no_button.textContent.length;
+
+  // base scaling from button size
+  let fontPx = Math.round(clamped * 0.32);
+
+  // shrink more if text is long
+  if (textLength > 15) fontPx *= 0.8;
+  if (textLength > 20) fontPx *= 0.7;
+  if (textLength > 25) fontPx *= 0.6;
+
+  fontPx = Math.max(8, Math.min(26, fontPx));
+
   no_button.style.fontSize = `${fontPx}px`;
+}
   if (clamped <= 30) {
     makeNoButtonRun();
   }
