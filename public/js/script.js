@@ -26,7 +26,7 @@ let i = 1;
 let clicks = 0;
 
 let yesSize = 40;
-let noSize = 40;
+let noSize = 90; // start wider so long text is readable early
 
 function refreshBanner() {
   const src = banner.src;
@@ -43,38 +43,13 @@ function setYesButtonSize(px) {
   yes_button.style.fontSize = `${fontPx}px`;
 }
 
-function setNoButtonSize(px) {
-  const clamped = Math.max(28, px);
-
-  no_button.style.height = `${clamped}px`;
-  no_button.style.width = `${clamped}px`;
-
-  // 🔥 Dynamic font shrink based on BOTH size + text length
-  const textLength = no_button.textContent.length;
-
-  // base scaling from button size
-  let fontPx = Math.round(clamped * 0.32);
-
-  // shrink more if text is long
-  if (textLength > 15) fontPx *= 0.8;
-  if (textLength > 20) fontPx *= 0.7;
-  if (textLength > 25) fontPx *= 0.6;
-
-  fontPx = Math.max(8, Math.min(26, fontPx));
-
-  no_button.style.fontSize = `${fontPx}px`;
-}
-  if (clamped <= 30) {
-    makeNoButtonRun();
-  }
-}
-
 function makeNoButtonRun() {
   const parent = document.querySelector(".buttons");
-  const parentRect = parent.getBoundingClientRect();
+  if (!parent) return;
 
-  const maxX = parentRect.width - no_button.offsetWidth;
-  const maxY = parentRect.height - no_button.offsetHeight;
+  const parentRect = parent.getBoundingClientRect();
+  const maxX = Math.max(0, parentRect.width - no_button.offsetWidth);
+  const maxY = Math.max(0, parentRect.height - no_button.offsetHeight);
 
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
@@ -84,6 +59,30 @@ function makeNoButtonRun() {
   no_button.style.top = `${randomY}px`;
 }
 
+function setNoButtonSize(px) {
+  const clamped = Math.max(28, px);
+
+  no_button.style.height = `${clamped}px`;
+  no_button.style.width = `${clamped}px`;
+
+  // ✅ Font shrinks based on BOTH button size + current text length
+  const textLength = (no_button.textContent || "").length;
+
+  // base font from size
+  let fontPx = clamped * 0.34;
+
+  // extra penalty for long messages (this is what makes it really shrink)
+  fontPx -= Math.max(0, textLength - 8) * 0.75;
+
+  // clamp
+  fontPx = Math.max(7, Math.min(24, Math.round(fontPx)));
+  no_button.style.fontSize = `${fontPx}px`;
+
+  // 🏃 run away when small
+  if (clamped <= 30) makeNoButtonRun();
+}
+
+// init
 setYesButtonSize(yesSize);
 setNoButtonSize(noSize);
 
@@ -94,17 +93,23 @@ no_button.addEventListener("click", () => {
   }
   clicks++;
 
+  // YES grows
   const increments = [18, 22, 26, 30, 36];
   const inc = increments[Math.floor(Math.random() * increments.length)];
   yesSize += inc;
   setYesButtonSize(yesSize);
 
+  // NO shrinks
   noSize -= 6;
   setNoButtonSize(noSize);
 
+  // update No text + IMPORTANT: re-run sizing AFTER text changes
   if (i < answers_no.length) {
     no_button.textContent = answers_no[i];
     i++;
+
+    // ✅ this is the missing piece that makes font react to longer phrases
+    setNoButtonSize(noSize);
   } else {
     alert(answers_no[answers_no.length - 1]);
 
@@ -114,7 +119,7 @@ no_button.addEventListener("click", () => {
     yes_button.textContent = "Yes";
 
     yesSize = 40;
-    noSize = 40;
+    noSize = 90;
 
     no_button.style.position = "static";
     no_button.style.left = "0px";
