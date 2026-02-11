@@ -78,10 +78,11 @@ body {
 #no-button {
   background-color: #ef4444; /* red */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  padding: 4px 8px;
 
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 #no-button:hover {
