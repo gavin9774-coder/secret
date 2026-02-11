@@ -11,36 +11,30 @@ body {
 
   min-height: 100vh;
 }
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
+  margin-top: 20px;
   padding: 20px;
   text-align: center;
 }
-.banner-gif {
-  width: 100%;
-  margin-top: 20px;
-}
-.banner-gif img {
-  height: 250px;
-  width: auto;
-  display: block;
-  margin: 0 auto 20px auto;
-}
+
 .buttons {
   display: flex;
   gap: 14px;
   justify-content: center;
   align-items: center;
 
-  position: relative; 
-  min-height: 120px; 
+  position: relative; /* required for runaway */
+  min-height: 140px;  /* space to move */
 }
+
 #yes-button,
 #no-button {
+  margin: 0 10px;
   color: white;
   border: none;
   cursor: pointer;
@@ -51,49 +45,49 @@ body {
 
   border-radius: 999px;
 
-  padding: 0;
-  width: 90px;
-  height: 40px;
-
-  font-size: 18px;
-  font-weight: 700;
+  /* JS controls size; keep padding light so width/height are predictable */
+  padding: 4px 10px;
   line-height: 1;
+  font-weight: 700;
 
-  transition: 
-    width 0.15s ease,
-    height 0.15s ease,
-    font-size 0.15s ease,
-    transform 0.12s ease,
-    left 0.15s ease,
-    top 0.15s ease;
+  transition: transform 0.12s ease, width 0.12s ease, height 0.12s ease, font-size 0.12s ease, left 0.12s ease, top 0.12s ease;
 }
+
 #yes-button {
-  background-color: #22c55e; /* nice green */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  background-color: green;
 }
 
-#yes-button:hover {
-  transform: scale(1.08);
-}
 #no-button {
-  background-color: #ef4444; /* red */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  text-align: center;
-  padding: 4px 8px;
+  background-color: red;
 
-  word-wrap: break-word;
+  /* ✅ allow wrapping instead of cutting off */
   white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+  text-align: center;
 }
 
+#yes-button:hover,
 #no-button:hover {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
+
 .message {
   display: none;
-  font-size: 28px;
-  font-weight: 700;
-  margin-top: 18px;
 }
+
+.banner-gif {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.banner-gif img {
+  width: auto;
+  height: 250px;
+}
+
 @media (max-width: 768px) {
   body {
     padding: 0 20px;
