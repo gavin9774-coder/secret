@@ -26,7 +26,7 @@ let i = 1;
 let clicks = 0;
 
 let yesSize = 40;
-let noSize = 90; // start wider so long text is readable early
+let noSize = 90;
 
 function refreshBanner() {
   const src = banner.src;
