@@ -12,7 +12,7 @@ const answers_no = [
   "POOKI PLEASEEEE",
   "monki...",
   "im losing it",
-  "im yearning",
+  "but im yearning",
   "PLEASEEE IM BEGGING",
   "i dont have rights.",
   ":'(((("
