@@ -1,3 +1,7 @@
+/* -----------------------------
+   PAGE LAYOUT
+----------------------------- */
+
 body {
   background-color: white;
   font-family: "Baloo 2", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -22,6 +26,10 @@ body {
   text-align: center;
 }
 
+/* -----------------------------
+   BUTTON WRAPPER
+----------------------------- */
+
 .buttons {
   display: flex;
   gap: 14px;
@@ -29,8 +37,12 @@ body {
   align-items: center;
 
   position: relative; /* required for runaway */
-  min-height: 140px;  /* space to move */
+  min-height: 140px;  /* space for movement */
 }
+
+/* -----------------------------
+   BUTTON BASE STYLING
+----------------------------- */
 
 #yes-button,
 #no-button {
@@ -45,37 +57,71 @@ body {
 
   border-radius: 999px;
 
-  /* JS controls size; keep padding light so width/height are predictable */
-  padding: 4px 10px;
-  line-height: 1;
+  padding: 6px 14px;
   font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
 
-  transition: transform 0.12s ease, width 0.12s ease, height 0.12s ease, font-size 0.12s ease, left 0.12s ease, top 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    width 0.12s ease,
+    height 0.12s ease,
+    font-size 0.12s ease,
+    left 0.12s ease,
+    top 0.12s ease;
 }
+
+/* -----------------------------
+   YES BUTTON
+----------------------------- */
 
 #yes-button {
-  background-color: green;
+  background-color: #22c55e;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-#no-button {
-  background-color: red;
+#yes-button:hover {
+  transform: scale(1.08);
+}
 
-  /* ✅ allow wrapping instead of cutting off */
+/* -----------------------------
+   NO BUTTON
+----------------------------- */
+
+#no-button {
+  background-color: #ef4444;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+  /* ✅ Wrap by words */
   white-space: normal;
-  overflow: visible;
-  text-overflow: unset;
-  word-break: break-word;
+
+  /* ✅ Keep text inside bubble */
+  overflow: hidden;
+  text-overflow: clip;
+
+  /* ✅ Do NOT split letters */
+  word-break: normal;
+
+  /* ✅ Only break very long words if needed */
+  overflow-wrap: break-word;
+
   text-align: center;
 }
 
-#yes-button:hover,
-#no-button:hover {
-  transform: scale(1.06);
-}
+/* -----------------------------
+   MESSAGE AFTER YES CLICK
+----------------------------- */
 
 .message {
   display: none;
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 18px;
 }
+
+/* -----------------------------
+   BANNER GIF
+----------------------------- */
 
 .banner-gif {
   width: 100%;
@@ -87,6 +133,10 @@ body {
   width: auto;
   height: 250px;
 }
+
+/* -----------------------------
+   MOBILE
+----------------------------- */
 
 @media (max-width: 768px) {
   body {
