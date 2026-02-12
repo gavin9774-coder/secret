@@ -10,12 +10,12 @@ const answers_no = [
   "im going to die",
   "alright last offer, bubs",
   "POOKI PLEASEEEE",
-  "monki ur testing my patience",
-  "omg im losing it",
-  "i thought yearners were earners",
+  "monki...",
+  "im losing it",
+  "im yearning",
   "PLEASEEE IM BEGGING",
-  "alright fine i dont have rights.",
-  ":((((("
+  "i dont have rights.",
+  ":'(((("
 ];
 
 const no_button = document.getElementById("no-button");
